@@ -1,0 +1,10 @@
+#include <iostream>
+#include "sorter.h"
+
+
+
+
+int main(int argc, char** argv){
+  sorter s;
+  s.debugSorter();
+}
