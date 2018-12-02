@@ -20,6 +20,15 @@ bool sorter::isSorted(double a[]){
   return true;
 }
 
+bool sorter::finishedInsertion(bool a[]){
+  for(int i = 0; i < (arraySize); i++){
+    if(a[i] == false){
+      return false;
+    }
+  }
+  return true;
+}
+
 void sorter::bubbleSort(double a[]){
   while(isSorted(a) == false){
     for(int i = 0; i < (arraySize-1); i++){
@@ -33,6 +42,55 @@ void sorter::bubbleSort(double a[]){
   printArray(a);
 }
 
+
+void sorter::insertionSort(double a[]){
+  double dummyNum = -100000;
+  double sortedArray [arraySize];
+  for(int j = 0; j < arraySize; j++){
+    sortedArray[j] = dummyNum;
+  }
+  double inserted;
+  int insertionPoint;
+  int shiftPos;
+
+  for(int i = 0; i < arraySize; i++){
+    inserted = a[i];
+    if(i == 0){
+      sortedArray[0] = inserted;
+    }else{
+      shiftPos = -1;
+      for(int k = arraySize-1; k > shiftPos; k--){
+        if(sortedArray[k] != -100000){
+          sortedArray[k+1] = sortedArray[k];
+          sortedArray[k] = inserted;
+        }
+      }
+      printArray(sortedArray);
+    }
+  }
+
+
+  /*leftShift code(Makes a space at a[shiftPos+1])
+  int shiftPos = 2;
+  int numbersShifted = 0;
+  double sortedArray [arraySize] = {-100000, 2, -100000, 3, -100000};
+  for(int k = 5-1; k > shiftPos; k--){
+    if(sortedArray[k] != -100000){
+      sortedArray[k+1] = sortedArray[k];
+      sortedArray[k] = 4;
+    }
+  }
+  */
+}
+
+
+
+
+
+
+
+
+
 void sorter::printArray(double a[]){
   for(int i = 0; i < arraySize; i++){
     cout << "[" << a[i] << "]";
@@ -43,7 +101,7 @@ void sorter::printArray(double a[]){
 
 
 void sorter::debugSorter(){
-  double test [5] = {1, 3, 2, 5, 4};
-  bubbleSort(test);
+  double test [5] = {5, 4, 3, 2, 1};
+  insertionSort(test);
 
 }

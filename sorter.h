@@ -11,9 +11,12 @@ class sorter{
     double **unSorted;
     int arraySize = 5;
 
-    //Sorting methods
     bool isSorted(double a[]);
+    bool finishedInsertion(bool a[]);
+
+    //Sorting methods
     void bubbleSort(double a[]);
+    void insertionSort(double a[]);
     void printArray(double a[]);
     void debugSorter();
 
