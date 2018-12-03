@@ -12,7 +12,7 @@ class sorter{
     int arraySize = 5;
 
     bool isSorted(double a[]);
-    bool finishedInsertion(bool a[]);
+    int calculateShiftPos(double a[], double value);
 
     //Sorting methods
     void bubbleSort(double a[]);

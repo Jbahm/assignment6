@@ -20,13 +20,12 @@ bool sorter::isSorted(double a[]){
   return true;
 }
 
-bool sorter::finishedInsertion(bool a[]){
-  for(int i = 0; i < (arraySize); i++){
-    if(a[i] == false){
-      return false;
+int sorter::calculateShiftPos(double a[], double value){
+  for(int i = 0; i < arraySize; i++){
+    if((value > a[i]) && (value < a[i+1])){
+      return i;
     }
   }
-  return true;
 }
 
 void sorter::bubbleSort(double a[]){
@@ -50,6 +49,7 @@ void sorter::insertionSort(double a[]){
     sortedArray[j] = dummyNum;
   }
   double inserted;
+  double highestValue;
   int insertionPoint;
   int shiftPos;
 
@@ -57,15 +57,24 @@ void sorter::insertionSort(double a[]){
     inserted = a[i];
     if(i == 0){
       sortedArray[0] = inserted;
-    }else{
+    }else if(inserted < sortedArray[0]){
       shiftPos = -1;
       for(int k = arraySize-1; k > shiftPos; k--){
-        if(sortedArray[k] != -100000){
-          sortedArray[k+1] = sortedArray[k];
-          sortedArray[k] = inserted;
+          if(sortedArray[k] != -100000){
+            sortedArray[k+1] = sortedArray[k];
+            sortedArray[k] = inserted;
+          }
         }
-      }
-      printArray(sortedArray);
+    }else if(inserted > sortedArray[i-1]){
+      sortedArray[i] = inserted;
+    }else{
+      shiftPos = calculateShiftPos(sortedArray, a[i]);
+      for(int l = arraySize-1; l > shiftPos; l--){
+          if(sortedArray[l] != -100000){
+            sortedArray[l+1] = sortedArray[l];
+            sortedArray[l] = inserted;
+          }
+        }
     }
   }
 
@@ -81,6 +90,7 @@ void sorter::insertionSort(double a[]){
     }
   }
   */
+  printArray(sortedArray);
 }
 
 
@@ -101,7 +111,7 @@ void sorter::printArray(double a[]){
 
 
 void sorter::debugSorter(){
-  double test [5] = {5, 4, 3, 2, 1};
+  double test [5] = {5, -4, 12, 1, 2};
   insertionSort(test);
 
 }
