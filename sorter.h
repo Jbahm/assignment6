@@ -16,6 +16,7 @@ class sorter{
 
     //Sorting methods
     void bubbleSort(double a[]);
+    void selectionSort(double a[]);
     void insertionSort(double a[]);
     void printArray(double a[]);
     void debugSorter();

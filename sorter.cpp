@@ -42,6 +42,27 @@ void sorter::bubbleSort(double a[]){
 }
 
 
+void sorter::selectionSort(double a[]){
+  double lowestNum;
+  double sortedArray [arraySize];
+  int lowestNumPos;
+  for(int i = 0; i < arraySize; i++){
+    lowestNum = 1000000000;
+    for(int j = 0; j < arraySize; j++){
+      if(a[j] != 1000000000){
+        if(a[j] < lowestNum){
+          lowestNum = a[j];
+          lowestNumPos = j;
+        }
+      }
+    }
+    sortedArray[i] = lowestNum;
+    a[lowestNumPos] = 1000000000;
+  }
+  printArray(sortedArray);
+}
+
+
 void sorter::insertionSort(double a[]){
   double dummyNum = -100000;
   double sortedArray [arraySize];
@@ -112,6 +133,6 @@ void sorter::printArray(double a[]){
 
 void sorter::debugSorter(){
   double test [5] = {5, -4, 12, 1, 2};
-  insertionSort(test);
+  selectionSort(test);
 
 }
