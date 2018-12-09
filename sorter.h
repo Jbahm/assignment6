@@ -8,8 +8,8 @@ class sorter{
     sorter();
     sorter(string fileName);
 
-    double **unSorted;
-    int arraySize = 5;
+    double *unSorted;
+    int arraySize;
 
     bool isSorted(double a[]);
     int calculateShiftPos(double a[], double value);

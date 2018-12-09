@@ -5,6 +5,7 @@
 
 
 int main(int argc, char** argv){
-  sorter s;
+
+  sorter s("array.txt");
   s.debugSorter();
 }

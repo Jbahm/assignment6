@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "sorter.h"
 
 using namespace std;
@@ -8,7 +9,18 @@ sorter::sorter(){
 }
 
 sorter::sorter(string fileName){
-  //
+  ifstream a;
+  string currentLine;
+
+
+  a.open(fileName);
+  a >> currentLine;
+  arraySize = stoi(currentLine.c_str());
+  unSorted = new double[arraySize];
+  for(int i = 0; i < arraySize; i++){
+    a >> currentLine;
+    unSorted[i] = stod(currentLine);
+  }
 }
 
 bool sorter::isSorted(double a[]){
@@ -132,7 +144,5 @@ void sorter::printArray(double a[]){
 
 
 void sorter::debugSorter(){
-  double test [5] = {5, -4, 12, 1, 2};
-  selectionSort(test);
-
+  printArray(unSorted);
 }
