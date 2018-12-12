@@ -32,6 +32,16 @@ bool sorter::isSorted(double a[]){
   return true;
 }
 
+
+bool sorter::subsetSorted(double a[], int start, int end){
+  for(int i = start; i < (end); i++){
+    if(a[i] > a[i+1]){
+      return false;
+    }
+  }
+  return true;
+}
+
 int sorter::calculateShiftPos(double a[], double value){
   for(int i = 0; i < arraySize; i++){
     if((value > a[i]) && (value < a[i+1])){
@@ -128,6 +138,81 @@ void sorter::insertionSort(double a[]){
 
 
 
+double sorter::partition(double a[], int startIndex, int endIndex){
+  double pivot = a[endIndex-1];
+  bool partitioning [(endIndex-startIndex)-1];
+  double aCopy[(endIndex-startIndex)-1];
+  int rightSub;
+  int leftSub;
+  int currI = 0;
+
+  for(int i = startIndex; i < endIndex; i++){
+    if(a[i] < pivot){
+      partitioning[i] = false;
+      aCopy[i] = a[i];
+    }else{
+      partitioning[i] = true;
+      aCopy[i] = a[i];
+    }
+  }
+
+  for(int k = 0; k < ((endIndex-startIndex)); k++){
+    if(partitioning[k] == false){
+      a[currI] = aCopy[k];
+      currI++;
+    }
+  }
+  a[currI] = pivot;
+  currI++;
+
+
+  for(int l = 0; l < ((endIndex-startIndex)); l++){
+    if(partitioning[l] == true){
+      a[currI] = aCopy[l];
+      currI++;
+      }
+    }
+
+    return pivot;
+}
+
+
+
+void sorter::quickSort(double a[]){
+  int pivotIndex;
+  int n = 1;
+  double pivot = partition(a, 0, arraySize);
+  double permPivotIndex;
+  double permPivot;
+  double pivotIndexR;
+  for(int i = 0; i < arraySize; i++){
+    if(a[i] == pivot){
+      pivotIndex = i;
+      pivotIndexR = i;
+      permPivotIndex = i;
+      permPivot = a[i];
+    }
+  }
+  while(pivotIndex > 1){
+  double oldPivot = pivot;
+  int oldIndex = pivotIndex;
+  pivot = partition(a, 0, pivotIndex);
+  a[oldIndex] = oldPivot;
+  for(int j = 0; j < pivotIndex; j++){
+    if(a[j] == pivot){
+      pivotIndex = j;
+    }
+  }
+  }
+  printArray(a);
+
+
+
+}
+
+
+
+
 
 
 
@@ -144,5 +229,6 @@ void sorter::printArray(double a[]){
 
 
 void sorter::debugSorter(){
-  printArray(unSorted);
+  quickSort(unSorted);
+
 }
