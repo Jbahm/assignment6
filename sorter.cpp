@@ -21,6 +21,19 @@ sorter::sorter(string fileName){
     a >> currentLine;
     unSorted[i] = stod(currentLine);
   }
+
+  double largestNum = -100000;
+  int largestNumLoc = 0;
+  for(int l = 0; l < arraySize; l++){
+    if(unSorted[l] > largestNum){
+      largestNum = unSorted[l];
+      largestNumLoc = l;
+    }
+  }
+  for (int k = largestNumLoc+1; k < arraySize; k++){
+    unSorted[k-1] = unSorted[k];
+  }
+  unSorted[arraySize-1] = largestNum;
 }
 
 bool sorter::isSorted(double a[]){
@@ -181,8 +194,12 @@ double sorter::partition(double a[], int startIndex, int endIndex){
 void sorter::quickSort(double a[]){
   int pivotIndex;
   int n = 1;
+
+
   double pivot = partition(a, 0, arraySize);
   double permPivotIndex;
+  double oldPivot;
+  int oldIndex;
   double permPivot;
   double pivotIndexR;
   for(int i = 0; i < arraySize; i++){
@@ -194,8 +211,8 @@ void sorter::quickSort(double a[]){
     }
   }
   while(pivotIndex > 1){
-  double oldPivot = pivot;
-  int oldIndex = pivotIndex;
+  oldPivot = pivot;
+  oldIndex = pivotIndex;
   pivot = partition(a, 0, pivotIndex);
   a[oldIndex] = oldPivot;
   for(int j = 0; j < pivotIndex; j++){
@@ -205,8 +222,6 @@ void sorter::quickSort(double a[]){
   }
   }
   printArray(a);
-
-
 
 }
 
